@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-04-21T15:43:19.972Z",
+  "workspaceRoot": "/home/tance/.openclaw/workspace/lingx-website-v4",
+  "weightsSource": "default",
+  "prompt": "创建零想科技官网V4版本。\n\n需求文档位置：/home/tance/.openclaw/workspace/lingx-website-v3/零想科技_官网最终需求文档_极简版.docx\nLOGO文件：/home/tance/.openclaw/workspace/lingx-website-v3/src/assets/LINGX LOGO.svg\n\n要求：\n1. 初始化Vite + React项目\n2. 使用提供的LINGX LOGO.svg矢量图\n3. 配色：深色背景(#050508) + 蓝紫光晕 + 白色文字\n4. 单页长页Scroll结构，包含9个部分\n5. Three.js粒子背景效果\n6. 滚动渐显动画\n7. 响应式设计\n8. 构建产物保存到docs/\n\n完成后构建并汇报结果。",
+  "taskCandidates": [],
+  "taskUnresolved": [
+    "no terrain node matched prompt signals"
+  ],
+  "actionCandidates": [],
+  "touchedFiles": []
+}

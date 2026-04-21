@@ -1,0 +1,213 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: 'Orbitron', 'Noto Sans SC', sans-serif;
+}
+
+canvas {
+  display: block;
+}
+
+.ui-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.ui-overlay .main-text {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+.ui-overlay .main-text h1 {
+  font-size: clamp(28px, 5vw, 56px);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 8px;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+  margin-bottom: 16px;
+}
+
+.ui-overlay .main-text .subtitle {
+  font-size: clamp(12px, 2vw, 18px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 12px;
+  text-transform: uppercase;
+}
+
+.ui-overlay .footer {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.ui-overlay .footer .brand {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+}
+
+.ui-overlay .footer .email {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
+}
+
+/* Portal Entries */
+.portal-entries {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 80px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+.portal-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.portal-entry .portal-icon {
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  transition: all 0.4s ease;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.portal-entry .portal-icon svg {
+  width: 36px;
+  height: 36px;
+  fill: rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease;
+}
+
+.portal-entry:hover .portal-icon {
+  border-color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.portal-entry:hover .portal-icon svg {
+  fill: #fff;
+}
+
+.portal-entry .portal-name {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.portal-entry:hover .portal-name {
+  color: #fff;
+}
+
+/* Portal content overlay */
+.portal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.portal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.portal-content {
+  text-align: center;
+  color: #fff;
+}
+
+.portal-content h2 {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 900;
+  letter-spacing: 8px;
+  margin-bottom: 24px;
+  text-shadow: 0 0 60px rgba(255, 255, 255, 0.5);
+}
+
+.portal-content p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 4px;
+  max-width: 600px;
+  line-height: 1.8;
+}
+
+.portal-content .close-btn {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.portal-content .close-btn:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.portal-content .close-btn span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  position: absolute;
+  transform: rotate(45deg);
+}
+
+.portal-content .close-btn span:last-child {
+  transform: rotate(-45deg);
+}
