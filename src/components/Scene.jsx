@@ -12,7 +12,7 @@
 
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import Particles from './Particles'
 import useStore from '../store/useStore'
@@ -20,13 +20,10 @@ import useStore from '../store/useStore'
 function CameraController() {
   const { cameraPosition, cameraTarget, activePortal, portalExpanded, phase } = useStore()
   
-  // 入口动画时的相机移动
   useEffect(() => {
     if (activePortal && portalExpanded) {
-      // 相机推进到入口
       useStore.getState().setCameraPosition([0, 0, 15])
     } else if (phase === 'world') {
-      // 世界模式，相机拉远
       useStore.getState().setCameraPosition([0, 0, 40])
     }
   }, [activePortal, portalExpanded, phase])
@@ -87,18 +84,13 @@ function Stars() {
   )
 }
 
-function PortalGate({ position, rotation, onClick, label, color = '#ffffff' }) {
-  const meshRef = useRef()
-  
+function PortalGate({ position, rotation, onClick, color = '#ffffff' }) {
   return (
     <group position={position} rotation={rotation} onClick={onClick}>
-      {/* 门框 */}
       <mesh>
         <torusGeometry args={[3, 0.1, 16, 64]} />
         <meshBasicMaterial color={color} transparent opacity={0.6} />
       </mesh>
-      
-      {/* 内部光晕 */}
       <mesh>
         <circleGeometry args={[2.8, 64]} />
         <meshBasicMaterial 
@@ -108,25 +100,19 @@ function PortalGate({ position, rotation, onClick, label, color = '#ffffff' }) {
           side={THREE.DoubleSide}
         />
       </mesh>
-      
-      {/* 光效 */}
       <pointLight color={color} intensity={2} distance={10} />
     </group>
   )
 }
 
-import { useRef } from 'react'
-
 function PortalGates() {
-  const { enterPortal, portalExpanded, activePortal } = useStore()
-  
-  // 只有在世界阶段才显示入口
+  const { enterPortal } = useStore()
   const phase = useStore(state => state.phase)
+  
   if (phase !== 'world' && phase !== 'explode') return null
   
   return (
     <group>
-      {/* 寻剑入口 - 左侧 */}
       <PortalGate
         position={[-25, 0, -10]}
         rotation={[0, Math.PI / 6, 0]}
@@ -136,8 +122,6 @@ function PortalGates() {
           enterPortal('xunjian')
         }}
       />
-      
-      {/* 奇幻巴比伦入口 - 右侧 */}
       <PortalGate
         position={[25, 0, -10]}
         rotation={[0, -Math.PI / 6, 0]}
@@ -174,7 +158,6 @@ export default function Scene() {
           maxPolarAngle={Math.PI / 1.5}
           minPolarAngle={Math.PI / 3}
         />
-        {/* 雾效增加深度感 */}
         <fog attach="fog" args={['#000000', 30, 150]} />
       </Suspense>
     </Canvas>
